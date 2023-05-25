@@ -22,6 +22,7 @@ public class SecurityConfig {
             .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            // 스프링시큐리티가 생성하지도않고 기존것을 사용하지도 않음
             .and()
             .build();
     }
