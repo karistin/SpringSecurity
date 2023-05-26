@@ -124,4 +124,59 @@ same origin : protocol, port, host를 통해 같은 출처라고 판단한다.
 http://localhost:80 == http://localhost == http://localhost/api/user
 != https://localhost != http://127.0.0.1(String 비교를 한다.)
 
-SOP(Same Origin Policy ) : 
+SOP(Same Origin Policy ) : 다른 출처의 리소스를 사용하는것을 제한하는것 
+CORS(Corss Origin Resource Sharing) : 추가 Http 헤더를 이용하여 출처에서 실행중인 웹 어플리케이션이
+다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 브라우저에 알려주는 체제. 
+
+### 단계 
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
+
+`
+Referrer-Policy: no-referrer
+Referrer-Policy: no-referrer-when-downgrade
+Referrer-Policy: origin
+Referrer-Policy: origin-when-cross-origin
+Referrer-Policy: same-origin
+Referrer-Policy: strict-origin
+Referrer-Policy: strict-origin-when-cross-origin
+Referrer-Policy: unsafe-url
+`
+
+- Simple Request
+  - GET, POST, HEAD
+  - Content-Type 
+    - application/x-www-form-urlencoded
+    - multipart/form-data
+    - text/plain
+  - 헤더는 Accept, Accept-Language, Content-Language, Content-Type 만 허용
+  
+
+- Preflight Request
+  - OPTIONS 메소드를 통해 다른 도메인의 리소스에 요청이 가능한지 확인 
+  ```http request
+  # 요청 
+    OPTIONS /resource/foo
+    Access-Control-Request-Method: DELETE
+    Access-Control-Request-Headers: origin, x-requested-with
+    Origin: https://foo.bar.org
+  
+  #응답 
+  Access-Control-Allow-Origin : 서버 측 허가 출처
+  Access-Control-Allow-Methods: 서버측 허가 메서드
+  Access-Control-Allow-Headers: 서버측 허가 헤더 
+  Access-Control-Max-size :preflight 응답 캐시 시간 
+     HTTP/1.1 204 No Content
+    Connection: keep-alive
+    Access-Control-Allow-Origin: https://foo.bar.org
+    Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE
+    Access-Control-Max-Age: 86400
+  ```
+  - 응답 바디는 비어있어야 한다.
+  - 응답 코드 200번대
+
+
+- Credentialed Request 
+  - 인증 관련 헤더를 포함할 때 사용하는 요청이다.
+  - client credentials:include
+  - server Access-Control-Allow-Credentials:true
