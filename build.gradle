@@ -16,7 +16,10 @@ configurations {
     }
 }
 
-
+jar {
+//    not making plain .jar
+    enabled = false
+}
 
 repositories {
     mavenCentral()
