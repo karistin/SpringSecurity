@@ -8,6 +8,15 @@ import java.util.Date;
 
 public class JwtTokenUtil {
 
+    public static String getUserName(String token, String secretKey) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
+            .getBody().get("username", String.class);
+    }
+    public static boolean isExpired(String token, String secretKey) {
+//        now와 시간 비교
+        return Jwts.parser().setSigningKey(secretKey).
+            parseClaimsJws(token).getBody().getExpiration().before(new Date());
+    }
     public static String createToken(String username, String key, long expireTimeMs) {
         Claims claims = Jwts.claims();
 

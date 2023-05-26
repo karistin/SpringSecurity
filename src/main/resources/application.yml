@@ -15,4 +15,4 @@ spring:
 
 jwt:
   token:
-    sercet: "secretKey"
+    secret: "secretKey"
