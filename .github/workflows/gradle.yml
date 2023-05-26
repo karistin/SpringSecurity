@@ -33,8 +33,7 @@ jobs:
       with:
         character set server: 'utf8'
         mysql database: 'spring-security'
-        mysql user: 'root'
-        mysql password: 'admin'
+        mysql root password: 'admin'
     - name: Run chmod to make gradlew executable
       run: chmod +x ./gradlew
     - name: Build with Gradle
