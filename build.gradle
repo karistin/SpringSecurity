@@ -7,10 +7,11 @@ plugins {
 }
 
 group = 'com.lucas'
-version = '0.0.1-SNAPSHOT'
+//version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 configurations {
+    jar.archiveName = 'springSecurity';
     compileOnly {
         extendsFrom annotationProcessor
     }

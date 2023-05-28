@@ -1,5 +1,0 @@
-FROM azul/zulu-openjdk:17
-COPY /build/libs/SpringSecurity-0.0.1-SNAPSHOT.jar /app/springSecurity-1.0.jar
-ENTRYPOINT ["java"]
-CMD ["-jar", "/app/springSecurity-1.0.jar", "-DJWT_TOKEN_SECRET=1234"]
-EXPOSE 8080

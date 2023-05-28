@@ -39,21 +39,19 @@ jobs:
         mysql database: 'spring-security'
         mysql user: 'root'
         mysql password: 'admin'
-#    - name: step up MySQL
-#      run:
-##        sudo /etc/init.d/mysql start
-#        mysql -h 127.0.0.1 --port 3306 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
-#        -e 'CREATE DATABASE IF NOT EXISTS ${{ env.DB_DATABASE }}';
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
-      with:
-        arguments: build
-
-    - name: Build with Gradle
       run: ./gradlew build
 
-    - name: Test with Gradle
-      run: ./gradlew test
+    - name: Build & Push Docker image
+      uses: mr-smithers-excellent/docker-build-push@v6
+      with:
+        image: kevin9809/spring-security-docker-image
+        tags: latest
+        registry: docker.io
+        dockerfile: Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
