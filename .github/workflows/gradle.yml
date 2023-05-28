@@ -32,18 +32,18 @@ jobs:
       with:
         java-version: '17'
         distribution: 'zulu'
-#    - name: Setup MySQL
-#      uses: samin/mysql-action@v1
-#      with:
-#        character set server: 'utf8'
-#        mysql database: 'spring-security'
-#        mysql user: 'root'
-#        mysql password: 'admin'
-    - name: step up MySQL
-      run:
-#        sudo /etc/init.d/mysql start
-        mysql -h 127.0.0.1 --port 3306 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }} 
-        -e 'CREATE DATABASE IF NOT EXISTS ${{ env.DB_DATABASE }}';
+    - name: Setup MySQL
+      uses: samin/mysql-action@v1
+      with:
+        character set server: 'utf8'
+        mysql database: 'spring-security'
+        mysql user: 'root'
+        mysql password: 'admin'
+#    - name: step up MySQL
+#      run:
+##        sudo /etc/init.d/mysql start
+#        mysql -h 127.0.0.1 --port 3306 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+#        -e 'CREATE DATABASE IF NOT EXISTS ${{ env.DB_DATABASE }}';
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
