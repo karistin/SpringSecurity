@@ -16,10 +16,6 @@ on:
 permissions:
   contents: read
 
-env:
-  DB_DATABASE: spring-security
-  DB_USER: root
-  DB_PASSWORD: admin
 jobs:
   build:
 
@@ -35,7 +31,6 @@ jobs:
     - name: Setup MySQL
       uses: samin/mysql-action@v1
       with:
-        character set server: 'utf8'
         mysql database: 'spring-security'
         mysql user: 'root'
         mysql password: 'admin'

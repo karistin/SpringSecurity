@@ -1,0 +1,24 @@
+version: "3"
+services:
+  spring-security:
+    image: spring-security-docker-image
+    restart: always
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: admin
+      MYSQL_PORT: 3306
+  mysqldb:
+    container_name: mysqldb
+    image: mysql
+    volumes:
+      - /home/user/Desktop/mysql:/var/lib/mysql
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: spring-security
+      MYSQL_ROOT_PASSWORD: admin
+
