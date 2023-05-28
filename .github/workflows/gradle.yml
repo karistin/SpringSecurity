@@ -40,7 +40,7 @@ jobs:
 #        mysql user: 'root'
 #        mysql password: 'admin'
     - name: step up MySQL
-      run: |
+      run:
 #        sudo /etc/init.d/mysql start
         mysql -h 127.0.0.1 --port 3306 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }} 
         -e 'CREATE DATABASE IF NOT EXISTS ${{ env.DB_DATABASE }}';
