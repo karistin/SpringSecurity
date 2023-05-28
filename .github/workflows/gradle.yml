@@ -29,21 +29,23 @@ jobs:
         java-version: '17'
         distribution: 'zulu'
     - name: Setup MySQL
-      uses: mirromutth/mysql-action@v1.1
+      uses: samin/mysql-action@v1
       with:
         character set server: 'utf8'
-        mysql version: '8.0.33'
         mysql database: 'spring-security'
-        mysql root password: 'admin'
-    - name: Run chmod to make gradlew executable
-      run: chmod +x ./gradlew
+        mysql user: 'root'
+        mysql password: 'admin'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
     - name: Build with Gradle
       uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
       with:
         arguments: build
-      #    - name: Setup Gradle
-#      uses: gradle/gradle-build-action@v2
+
+    - name: Build with Gradle
+      run: ./gradlew build
+
     - name: Test with Gradle
       run: ./gradlew test
-    - name: Run build with Gradle Wrapper
-      run: ./gradlew build
