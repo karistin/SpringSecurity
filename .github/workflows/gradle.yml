@@ -41,8 +41,9 @@ jobs:
 #        mysql password: 'admin'
     - name: step up MySQL
       run: |
-        sudo /etc/init.d/mysql start
-        mysql -h 127.0.0.1 -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+#        sudo /etc/init.d/mysql start
+        mysql -h 127.0.0.1 --port 3306 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }} 
+        -e 'CREATE DATABASE IF NOT EXISTS ${{ env.DB_DATABASE }}';
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
