@@ -16,10 +16,14 @@ on:
 permissions:
   contents: read
 
+env:
+  DB_DATABASE: spring-security
+  DB_USER: root
+  DB_PASSWORD: admin
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v3
@@ -28,14 +32,17 @@ jobs:
       with:
         java-version: '17'
         distribution: 'zulu'
-    - name: Setup MySQL
-      uses: samin/mysql-action@v1
-      with:
-        character set server: 'utf8'
-        mysql database: 'spring-security'
-        mysql user: 'root'
-        mysql password: 'admin'
-
+#    - name: Setup MySQL
+#      uses: samin/mysql-action@v1
+#      with:
+#        character set server: 'utf8'
+#        mysql database: 'spring-security'
+#        mysql user: 'root'
+#        mysql password: 'admin'
+    - name: step up MySQL
+      run: |
+        sudo /etc/init.d/mysql start
+        mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
