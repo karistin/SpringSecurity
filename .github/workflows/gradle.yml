@@ -42,7 +42,7 @@ jobs:
     - name: step up MySQL
       run: |
         sudo /etc/init.d/mysql start
-        mysql -h '127.0.0.1' -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+        mysql -h 127.0.0.1 -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
